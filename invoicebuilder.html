@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/mihir/Downloads/Invoice_copy/Invoice_copy.html -->
+<html dir="ltr" class="hawkExperience" lang="en_US" data-langpack="/invoice/en-US/_languagepack"><head><meta name="robots" content="noindex, nofollow"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="robots" content="noindex, nofollow"><title>invoice-name-month</title><link href="/invoice_gen/main.ltr.css" media="all" rel="stylesheet" type="text/css"><link href="/invoice_gen/app.ltr.css" edia="all" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+<style>
+    @media print {
+               .noprint {
+                  display: none;
+               }
+            }
+</style>
+
+
+</head><body id="page" class=" ltr"><div id="payerViewDiv"><form id="payInvoiceForm" name="payInvoiceForm" action="#" method="post"><div role="content" id="content" class=" invoice" tabindex="-1"><section class="legacycontainer payerMinPadding"><div class="section invoiceDetails"><div class="payerGuestCentered"><div class="row invoiceInfo"><div style="display: none" id="isPayer">true</div><div class="col-xs-12"><div class="row" style="padding-right: 0px;"><div class="col-xs-5" id="printPreview"><div class="businessLogo"><img border="0" id="logoUrl" alt="" src="#"><div class="headline"><h3>From:</h3></div></div>
+<div class="businfobox"><div class="headline"></div><div class="noprint"><input type="text" id="nameInp" placeholder="your name"></div><div id="name" style="font-weight: 700;"></div></div>
+<div class="businfobox"><br><span class="noprint"><input type="text" id="addr1Inp" placeholder="addressline"><br></span>Address:- <span id="addr1"></span><br><span class="noprint"><input type="text" id="phoneInp" placeholder="phone"><br></span>Ph:- <span id="phone"></span><br><span class="noprint"><input type="text" id="emailInp" placeholder="email"><br></span>Email:- <span id="email"></span><br></div></div><div class="col-xs-5 col-xs-offset-2"><div class="row"><div class="col-xs-5"></div><div class="col-xs-7" style="text-align: left; padding-left: 3px;"><div class="pageCurl">INVOICE</div></div></div><div class="row"><div class="col-xs-5"></div><div class="col-xs-7" style="text-align: left; padding-left: 3px;padding-right: 0px;"><div class="row" style="padding-right: 0px;"></div><!--  --></div></div>
+<div class="noprint row invsummary"><input type="text" id="invnoInp" placeholder="Invoice no. (0001)"></div><div class="row invsummary"><div class="col-xs-5" style="text-align: right; padding-right: 10px;">Invoice #:</div><div class="col-xs-7" style="padding-left: 3px;/* text-align: right; */" id="invoiceNumber" data-invoice="invoiceNumber"><span id="invno"></span></div></div>
+<div class="noprint row invsummary"><input type="text" id="invdateInp" placeholder="Invoice date (Jan 31, 2022)"></div><div class="row invsummary"><div class="col-xs-5" style="text-align: right; padding-right: 10px;">Invoice date:</div><div class="col-xs-7" style="padding-left: 3px;" data-invoice="issueDate"><span id="invdate"></span></div></div><div class="row invsummary"><div class="col-xs-5" style="text-align: right; padding-right: 10px;"></div><div class="col-xs-7" style="padding-left: 3px;"><div class="paySummary text-center"><div>Amount due:</div><div class="amount"><span class="noprint"><input class="nostore" type="text" id="dueInp" placeholder="due"><br></span><strong><span id="due"></span></strong></div></div></div></div></div></div><div class="sectionBottom"></div><div class="row"><div class="col-xs-6"><div class="headline"><h3>Bill To:</h3></div><div class="businfobox recipientInfo"></div><div class="businfobox recipientInfo" id="recipientEmailAddr"><b>Dear Digital BV</b><br><br>Vorkstraat 22<br>9000 gent<br>Belgium<br>VAT: BE0753556871</div></div></div><div class="row" id="itemDetails"><!-- section header start--><table style="width:100%;table-layout:fixed;"><thead class="itemdetailsheader"><tr><th class="itemdescription"><div clascalcus="wrap">Description</div></th><th class="itemamount text-right">Amount</th></tr></thead><tbody class="itemdetailsbody"><tr><td class="itemdescription"><div class="wrap"><span class="noprint"><input type="text" id="desc1Inp" placeholder="descripiton line 1"></span><span id="desc1"></span></div></td><td class="itemamount text-right"><span class="noprint"><input type="text" class="nostore" id="amt1Inp" placeholder="Amount 1"><br></span><span id="amt1"></span></td></tr></tbody></table><!-- section header end--></div><div class="row" id="invoiceTotals"><table style="width:100%;"><tbody><tr><td>&nbsp;</td><td class="text-right" style="width:25%;border-bottom: 1px solid #ddd;">Total</td><td class="text-right" style="width:15%;border-bottom: 1px solid #ddd;"><span class="noprint"><input class="nostore" type="text" id="subtotalInp" placeholder="Total"><br></span><span id="subtotal"></span></td></tr><tr class="borderOnTop"><td></td></tr></tbody></table></div><div style="margin-top: 20px;"></div></div></div><style>.tip_ltr {float: left;}.pay_ltr {float:left;margin-right:30px;}.tip_rtl {float: right !important;}.pay_rtl {float:right;margin-left:30px;}
+input#dueInp {
+    width: 100%;
+    text-align: center;
+}
+input#amt1Inp, input#subtotalInp {
+    width: 100%;
+    text-align: right;
+}
+</style>
+
+<script>
+$("[id$='Inp']:not(.nostore)").each(function(i,n) {
+    var vals = localStorage.getItem($(this).attr('id'));
+    if(vals){
+        $('#'+$(this).attr('id').replace('Inp','')).text(vals);
+        $(this).val(vals);
+    }    
+});
+
+$("[id$='Inp']").on('input',function(e){
+    $('#'+$(this).attr('id').replace('Inp','')).text($(this).val());
+    if(!$(this).hasClass('nostore')) {
+        localStorage.setItem($(this).attr('id'), $(this).val());
+    }    
+});
+</script>
+</body></html>
