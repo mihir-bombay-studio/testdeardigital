@@ -1,0 +1,223 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  width: 100%;
+  max-width: 210mm;
+  margin: auto;
+}
+.header,
+.footer {
+  text-align: center;
+  padding: 10px;
+}
+.invoice-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.invoice-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 2px solid black;
+}
+.invoice-box div {
+  margin: 5px;
+}
+.parent {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* This will create two equal-width columns */
+  gap: 20px; /* This will add some space between the columns */
+}
+.parent .section {
+  padding-bottom: 20px; /* Add some space at the bottom of each section */
+  margin-bottom: 20px; /* Add some space between sections */
+}
+.section {
+  margin: 20px 0;
+}
+.section-title {
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid black;
+}
+th {
+  background-color: #1c64f2;
+  color: #ffffff;
+}
+.total {
+  text-align: right;
+  font-weight: bold;
+}
+input,
+textarea {
+  border: 0;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 16px;
+  padding: 0;
+  outline: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+}
+#addr2Inp {
+  margin-top: 0;
+}
+
+.section input,
+.section textarea {
+  width: 90%;
+}
+.section input.heavy {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 24px;
+}
+input[id$="Inp"],
+textarea[id$="Inp"] {
+  color: #091a41;
+  text-decoration: underline;
+}
+table th:not(:first-child),
+table td:not(:first-child) {
+  text-align: right;
+}
+.remove-row {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: -8px;
+  top: calc(50% + -8px);
+  background-color: #000;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.3s, background-color 0.3s;
+  opacity: 0.8;
+}
+.last-row-first-col .add-row {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: -8px;
+  top: -8px;
+  background-color: #000;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.3s, background-color 0.3s;
+  opacity: 0.8;
+}
+.add-row:hover,
+.remove-row:hover {
+  background-color: #1c64f2;
+  cursor: pointer;
+  opacity: 1;
+}
+table {
+  table-layout: fixed; /* This makes all columns equal width */
+  width: 100%; /* Full width of the parent */
+}
+
+table th:first-child,
+table td:first-child {
+  position: relative;
+  width: 40%; /* This gives the first column a larger width */
+}
+table input {
+  width: calc(100% - 16px);
+  text-decoration: underline;
+  display: inline-block;
+}
+table td:not(:first-child) input {
+  text-align: right;
+}
+.action-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #1c64f2;
+  color: #ffffff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-family: "Open Sans", sans-serif;
+}
+.file-wrapper {
+margin: 1em 0 6em;
+padding: 1em;
+background-color: #f9f9f9;
+border-radius: 5px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+}
+
+.file-label {
+display: block;
+margin-bottom: 0.5em;
+color: #333;
+font-weight: bold;
+}
+
+.file-wrapper input[type="file"] {
+display: block;
+padding: 0.5em;
+color: #333;
+background-color: #fff;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-sizing: border-box;
+margin: 0 auto;
+}
+.text-right {
+text-align: right;
+}
+@media print {
+  .container {
+    width: 100%;
+  }
+  .no-print {
+    display: none;
+  }
+  input[id$="Inp"],
+  textarea[id$="Inp"],
+  table input {
+    color: initial;
+    text-decoration: none;
+  }
+  /* remove placeholder */
+  input::placeholder,
+  textarea::placeholder {
+    color: transparent;
+  }
+  .last-row-first-col .add-row,
+  .remove-row {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .invoice-box {
+    flex-direction: column;
+  }
+  .invoice-box div {
+    margin: 5px 0;
+  }
+}

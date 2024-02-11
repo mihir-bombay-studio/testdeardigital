@@ -1,46 +1,248 @@
 <!DOCTYPE html>
-<!-- saved from url=(0063)file:///C:/Users/mihir/Downloads/Invoice_copy/Invoice_copy.html -->
-<html dir="ltr" class="hawkExperience" lang="en_US" data-langpack="/invoice/en-US/_languagepack"><head><meta name="robots" content="noindex, nofollow"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="robots" content="noindex, nofollow"><title>invoice-name-month</title><link href="/invoice_gen/main.ltr.css" media="all" rel="stylesheet" type="text/css"><link href="/invoice_gen/app.ltr.css" edia="all" rel="stylesheet" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
-<style>
-    @media print {
-               .noprint {
-                  display: none;
-               }
-            }
-</style>
-
-
-</head><body id="page" class=" ltr"><div id="payerViewDiv"><form id="payInvoiceForm" name="payInvoiceForm" action="#" method="post"><div role="content" id="content" class=" invoice" tabindex="-1"><section class="legacycontainer payerMinPadding"><div class="section invoiceDetails"><div class="payerGuestCentered"><div class="row invoiceInfo"><div style="display: none" id="isPayer">true</div><div class="col-xs-12"><div class="row" style="padding-right: 0px;"><div class="col-xs-5" id="printPreview"><div class="businessLogo"><img border="0" id="logoUrl" alt="" src="#"><div class="headline"><h3>From:</h3></div></div>
-<div class="businfobox"><div class="headline"></div><div class="noprint"><input type="text" id="nameInp" placeholder="your name"></div><div id="name" style="font-weight: 700;"></div></div>
-<div class="businfobox"><br><span class="noprint"><input type="text" id="addr1Inp" placeholder="addressline"><br></span>Address:- <span id="addr1"></span><br><span class="noprint"><input type="text" id="phoneInp" placeholder="phone"><br></span>Ph:- <span id="phone"></span><br><span class="noprint"><input type="text" id="emailInp" placeholder="email"><br></span>Email:- <span id="email"></span><br></div></div><div class="col-xs-5 col-xs-offset-2"><div class="row"><div class="col-xs-5"></div><div class="col-xs-7" style="text-align: left; padding-left: 3px;"><div class="pageCurl">INVOICE</div></div></div><div class="row"><div class="col-xs-5"></div><div class="col-xs-7" style="text-align: left; padding-left: 3px;padding-right: 0px;"><div class="row" style="padding-right: 0px;"></div><!--  --></div></div>
-<div class="noprint row invsummary"><input type="text" id="invnoInp" placeholder="Invoice no. (0001)"></div><div class="row invsummary"><div class="col-xs-5" style="text-align: right; padding-right: 10px;">Invoice #:</div><div class="col-xs-7" style="padding-left: 3px;/* text-align: right; */" id="invoiceNumber" data-invoice="invoiceNumber"><span id="invno"></span></div></div>
-<div class="noprint row invsummary"><input type="text" id="invdateInp" placeholder="Invoice date (Jan 31, 2022)"></div><div class="row invsummary"><div class="col-xs-5" style="text-align: right; padding-right: 10px;">Invoice date:</div><div class="col-xs-7" style="padding-left: 3px;" data-invoice="issueDate"><span id="invdate"></span></div></div><div class="row invsummary"><div class="col-xs-5" style="text-align: right; padding-right: 10px;"></div><div class="col-xs-7" style="padding-left: 3px;"><div class="paySummary text-center"><div>Amount due:</div><div class="amount"><span class="noprint"><input class="nostore" type="text" id="dueInp" placeholder="due"><br></span><strong><span id="due"></span></strong></div></div></div></div></div></div><div class="sectionBottom"></div><div class="row"><div class="col-xs-6"><div class="headline"><h3>Bill To:</h3></div><div class="businfobox recipientInfo"></div><div class="businfobox recipientInfo" id="recipientEmailAddr"><b>Dear Digital BV</b><br><br>Vorkstraat 22<br>9000 gent<br>Belgium<br>VAT: BE0753556871</div></div></div><div class="row" id="itemDetails"><!-- section header start--><table style="width:100%;table-layout:fixed;"><thead class="itemdetailsheader"><tr><th class="itemdescription"><div clascalcus="wrap">Description</div></th><th class="itemamount text-right">Amount</th></tr></thead><tbody class="itemdetailsbody"><tr><td class="itemdescription"><div class="wrap"><span class="noprint"><input type="text" id="desc1Inp" placeholder="descripiton line 1"></span><span id="desc1"></span></div></td><td class="itemamount text-right"><span class="noprint"><input type="text" class="nostore" id="amt1Inp" placeholder="Amount 1"><br></span><span id="amt1"></span></td></tr></tbody></table><!-- section header end--></div><div class="row" id="invoiceTotals"><table style="width:100%;"><tbody><tr><td>&nbsp;</td><td class="text-right" style="width:25%;border-bottom: 1px solid #ddd;">Total</td><td class="text-right" style="width:15%;border-bottom: 1px solid #ddd;"><span class="noprint"><input class="nostore" type="text" id="subtotalInp" placeholder="Total"><br></span><span id="subtotal"></span></td></tr><tr class="borderOnTop"><td></td></tr></tbody></table></div><div style="margin-top: 20px;"></div></div></div><style>.tip_ltr {float: left;}.pay_ltr {float:left;margin-right:30px;}.tip_rtl {float: right !important;}.pay_rtl {float:right;margin-left:30px;}
-input#dueInp {
-    width: 100%;
-    text-align: center;
-}
-input#amt1Inp, input#subtotalInp {
-    width: 100%;
-    text-align: right;
-}
-</style>
-
-<script>
-$("[id$='Inp']:not(.nostore)").each(function(i,n) {
-    var vals = localStorage.getItem($(this).attr('id'));
-    if(vals){
-        $('#'+$(this).attr('id').replace('Inp','')).text(vals);
-        $(this).val(vals);
-    }    
-});
-
-$("[id$='Inp']").on('input',function(e){
-    $('#'+$(this).attr('id').replace('Inp','')).text($(this).val());
-    if(!$(this).hasClass('nostore')) {
-        localStorage.setItem($(this).attr('id'), $(this).val());
-    }    
-});
-</script>
-</body></html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>invoice-name-month</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="/assets/imgs/fav.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/assets/css/invoicebuilder.css" rel="stylesheet" />
+    <script src="/assets/js/invoicebuilder.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="invoice-title">INVOICE</div>
+      </div>
+      <div class="parent">
+        <div class="section">
+          <div class="section-title">From:</div>
+          <input
+            class="heavy"
+            type="text"
+            id="nameInp"
+            name="name"
+            placeholder="Enter your name"
+            value="John Doe"
+          /><br />
+          <label for="address">Address:</label><br />
+          <input id="addr1Inp" name="address" placeholder="Address Line 1" />
+          <input
+            id="addr2Inp"
+            name="address2"
+            placeholder="Address Line 2"
+          /><br />
+          <label for="phone">Phone:</label><br />
+          <input
+            type="tel"
+            id="phoneInp"
+            name="phone"
+            placeholder="Enter your phone number"
+          /><br />
+          <label for="email">Email:</label><br />
+          <input
+            type="email"
+            id="emailInp"
+            name="email"
+            placeholder="Enter your email address"
+          /><br />
+          <input
+            type="text"
+            id="extraInp"
+            name="extra"
+            placeholder="Extra info (optional)"
+          /><br />
+        </div>
+        <div class="section">
+          <div class="section-title">Bill To:</div>
+          <input
+            class="heavy"
+            type="text"
+            id="companyNameInp"
+            name="companyName"
+            value="Digital BV"
+          /><br />
+          <input
+            type="text"
+            id="companyStreetInp"
+            name="street"
+            value="Vorkstraat 22"
+          /><br />
+          <input
+            type="text"
+            id="companyCityInp"
+            name="city"
+            value="9000 gent"
+          /><br />
+          <input
+            type="text"
+            id="companyCountryInp"
+            name="country"
+            value="Belgium"
+          /><br />
+          <label for="vat">VAT:</label>
+          <input
+            type="text"
+            id="companyVatInp"
+            name="vat"
+            value="BE0753556871"
+          /><br />
+        </div>
+      </div>
+      <div class="invoice-box">
+        <div>
+          <p>
+            Invoice #:
+            <input
+              type="text"
+              id="invnoInp"
+              name="invoice-number"
+              placeholder="0001"
+            />
+          </p>
+          <p>
+            Invoice date:
+            <input type="date" id="invoiceDate" name="invoice-date" value="" />
+          </p>
+          <p class="no-print">
+            Invoice currency:
+            <select id="currencyInp" name="currency">
+              <option value="₹">INR</option>
+              <option value="€">EUR</option>
+              <option value="$">USD</option>
+            </select>
+          </p>
+        </div>
+        <div>
+          <p><strong>Amount due:</strong></p>
+          <p class="text-right">
+            <strong
+              ><span class="grand-total">0</span
+              ><span class="currency">₹</span></strong
+            >
+          </p>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>SAC Code</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="remove-row">-</span>
+              <input
+                type="text"
+                id="desc1Inp"
+                placeholder="Line description"
+              />
+            </td>
+            <td><input type="text" value="998314" placeholder="______" /></td>
+            <td>
+              <input
+                class="input-qty-cell"
+                type="text"
+                value="1"
+                placeholder="Enter QTY"
+                pattern="^[0-9]+$"
+              />
+            </td>
+            <td>
+              <input
+                class="input-price-cell"
+                type="text"
+                value="0"
+                placeholder="Enter Price"
+                pattern="^[0-9]+$"
+              /><span class="currency">₹</span>
+            </td>
+            <td>
+              <span class="line-total">0</span><span class="currency">₹</span>
+            </td>
+          </tr>
+          <tr class="last-row">
+            <td class="last-row-first-col" colspan="4">
+              <span class="add-row">+</span>Total
+            </td>
+            <td class="total">
+              <span class="grand-total">0</span><span class="currency">₹</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="section">
+        <!-- Bank account details PAN, Bank Acc no, Acc holder Name, IFSC code, Bank Name and a declaration that says the person themselves are responsible for their own income tax filings -->
+        <div class="section-title">Bank Account Details:</div>
+        <label for="panInp">PAN number:</label>
+        <input
+          type="text"
+          id="panInp"
+          name="pan"
+          placeholder="Enter your PAN number"
+        /><br />
+        <label for="bankAccNoInp">Bank Account Number:</label>
+        <input
+          type="text"
+          id="bankAccNoInp"
+          name="bankAccNo"
+          placeholder="Enter your Bank Account Number"
+        /><br />
+        <label for="accHolderNameInp">Account Holder Name:</label>
+        <input
+          type="text"
+          id="accHolderNameInp"
+          name="accHolderName"
+          placeholder="Enter your Account Holder Name"
+        /><br />
+        <label for="ifscCodeInp">IFSC Code:</label>
+        <input
+          type="text"
+          id="ifscCodeInp"
+          name="ifscCode"
+          placeholder="Enter your IFSC Code"
+        /><br />
+        <label for="bankNameInp">Bank Name:</label>
+        <input
+          type="text"
+          id="bankNameInp"
+          name="bankName"
+          placeholder="Enter your Bank Name"
+        /><br />
+        <p>
+          I hereby solemnly affirm and declare that the information furnished
+          above is accurate and complete to the best of my knowledge and belief.
+          I acknowledge that I am solely responsible for compliance with all
+          applicable tax laws, including the filing of returns and payment of
+          taxes to the Income Tax Department of India.
+        </p>
+      </div>
+      <div class="footer no-print">
+        <button class="action-button" onclick="window.print()">
+          Print this invoice
+        </button>
+        <button
+          class="action-button"
+          onclick="localStorage.clear(); location.reload();"
+        >
+          Clear saved data
+        </button>
+        <div class="file-wrapper">
+          <label class="file-label" for="file">Import data:</label>
+          <input type="file" id="file" name="file" placeholder="import data" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
