@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DMARC Report Parser</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+      }
+
+      input,
+      button {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Upload DMARC XML Reports</h1>
+    <input type="file" id="fileInput" multiple accept=".xml" />
+    <button id="processButton">Process Files</button>
+    <script>
+      document.getElementById("processButton").addEventListener("click", () => {
+        const files = document.getElementById("fileInput").files;
+        if (files.length === 0) {
+          alert("Please select one or more files.");
+          return;
+        }
+
+        const parser = new DOMParser();
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent +=
+          "Organization Name,Report ID,Date Range,Number of Records,SPF Pass Count,DKIM Pass Count\n"; // CSV header
+
+        Array.from(files).forEach((file) => {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
+            const orgName =
+              xmlDoc.getElementsByTagName("org_name")[0].textContent;
+            const reportId =
+              xmlDoc.getElementsByTagName("report_id")[0].textContent;
+            const dateBegin =
+              xmlDoc.getElementsByTagName("begin")[0].textContent;
+            const dateEnd = xmlDoc.getElementsByTagName("end")[0].textContent;
+            const records = xmlDoc.getElementsByTagName("record");
+            const numRecords = records.length;
+            let spfPass = 0,
+              dkimPass = 0;
+
+            Array.from(records).forEach((record) => {
+              const spfResult =
+                record.getElementsByTagName("spf")[0].textContent;
+              const dkimResult =
+                record.getElementsByTagName("dkim")[0].textContent;
+              if (spfResult === "pass") spfPass++;
+              if (dkimResult === "pass") dkimPass++;
+            });
+
+            // Format date range to human-readable format (optional)
+            const dateRange = `${
+              new Date(parseInt(dateBegin) * 1000).toISOString().split("T")[0]
+            } to ${
+              new Date(parseInt(dateEnd) * 1000).toISOString().split("T")[0]
+            }`;
+
+            csvContent += `${orgName},${reportId},${dateRange},${numRecords},${spfPass},${dkimPass}\n`;
+          };
+          reader.onloadend = function () {
+            if (file === files[files.length - 1]) {
+              // Last file processed
+              // Trigger CSV download
+              const encodedUri = encodeURI(csvContent);
+              const link = document.createElement("a");
+              link.setAttribute("href", encodedUri);
+              link.setAttribute("download", "dmarc_summary.csv");
+              document.body.appendChild(link); // Required for FF
+              link.click();
+              document.body.removeChild(link);
+            }
+          };
+          reader.readAsText(file);
+        });
+      });
+    </script>
+  </body>
+</html>
